@@ -238,6 +238,15 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
     else:
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
     ret += """</div>
+ </div>
+    <div class="fixed-action-btn" style="bottom:74px; right:15px">
+    <a class="btn-floating btn-large waves-effect waves-light green accent-4" id="refresh" name="refresh"><i class="material-icons">refresh</i></a>
+    </div>
+    <script>
+    $(function() {
+    $('#refresh').click(function(e) {
+    location.reload();
+    }); }); </script>
     <footer class="page-footer red accent-5>
     <div class="footer-copyright">
     <p class="center">&copy; BunnyCompany 2018</p>

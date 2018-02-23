@@ -117,7 +117,7 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
     ret += """</div>
     <div class="fixed-action-btn" style="bottom:74px; right:15px">
-    <a class="btn-floating btn-large waves-effect waves-light green accent-5" id="next" name="next"><i class="material-icons">skip_next</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light green accent-4" id="next" name="next"><i class="material-icons">skip_next</i></a>
     </div>
     <script>
     $(function() {
