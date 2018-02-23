@@ -1,0 +1,15 @@
+FONCTIONNALITÉS:
+1-> refresh button
+1-> next button
+2-> Forms: bind enter
+3-> responsive
+4-> Change favicon
+5-> Display channel name
+
+REFUSER PLUS D'1 CONNECTION PAR UTILISATEURS
+
+HTTPS
+
+ERREURS:
+1-> pymysql.err.InternalError: (1366, "Incorrect string value: '\\xE2\\x80\\xAC\\xE2\\x80\\xAC...' for column 'p_title' at row 1")
+2-> La navbar ne doit pas être fixe
