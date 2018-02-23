@@ -110,13 +110,28 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
             function stopVideo() {
             player.stopVideo();
             }
-            </script>
-            """
+            </script>"""
         else:
             ret += """<p class="center-align"><b><i>Add musics first</i></b></p>"""
     else:
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
     ret += """</div>
+    <div class="fixed-action-btn" style="bottom:74px; right:15px">
+    <a class="btn-floating btn-large waves-effect waves-light green accent-5" id="next" name="next"><i class="material-icons">skip_next</i></a>
+    </div>
+    <script>
+    $(function() {
+    $('#next').click(function(e) {
+    $.ajax({
+    url: '/changeMusic',
+    type: 'POST',
+    success: function(response) {
+    location.reload();
+    },
+    error: function(error) {
+    Materialize.toast('ERROR While changing music', 4000, 'red')
+    }
+    }); }); }); </script>
     <footer class="page-footer red accent-5>
     <div class="footer-copyright">
     <p class="center">&copy; BunnyCompany 2018</p>
