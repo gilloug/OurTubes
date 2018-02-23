@@ -7,6 +7,7 @@ def connection():
     ret = """<!DOCTYPE html>
     <html lang="en">
     <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -56,8 +57,10 @@ def connection():
     </form>
     </div>
     </body>
-    <footer class="footer">
-    <p>&copy; BunnyCompany 2018</p>
+    <footer class="page-footer red accent-5>
+    <div class="footer-copyright">
+    <p class="center">&copy; BunnyCompany 2018</p>
+    </div>
     </footer>
     </html>"""
     return ret
@@ -68,8 +71,10 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
     ret = """<!DOCTYPE html>
     <html lang="en">
     <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>OurTubes</title>
     </head>
@@ -125,6 +130,21 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         data = cursor.fetchall()
         i = 0
         data = tuple(sorted(data, reverse=True, key=lambda item: item[5]))
+        if len(data) > 0:
+            ret += """<li class="collection-item avatar">
+            <div class="title">
+            Current channel: """ + connected_to + """
+            </div>
+            <div class="secondary-content">
+            Current music: """ + data[0][4] + """
+            </div>
+            </li>"""
+        else:
+            ret += """<li class="collection-item">
+            <p class="title">
+            Current channel: """ + connected_to + """
+            </p>
+            </li>"""
         if len(data) is not 0:
             for music in data:
                 if i != 0:
@@ -216,10 +236,12 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         conn.close()
     else:
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
-        ret += """</div>
-        <footer class="footer">
-        <p>&copy; BunnyCompany 2018</p>
-        </footer>
-        </body>
-        </html>"""
+    ret += """</div>
+    <footer class="page-footer red accent-5>
+    <div class="footer-copyright">
+    <p class="center">&copy; BunnyCompany 2018</p>
+    </div>
+    </footer>
+    </body>
+    </html>"""
     return ret

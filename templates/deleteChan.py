@@ -8,6 +8,7 @@ def main(mysql=None, connected_as=''):
     ret += """<!DOCTYPE html>
     <html lang="en">
     <head>
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -104,9 +105,11 @@ def main(mysql=None, connected_as=''):
       </form>
     </div>
     </div>
-    <footer class="footer">
-    <p>&copy; BunnyCompany 2018</p>
+    <footer class="page-footer red accent-5>
+    <div class="footer-copyright">
+    <p class="center">&copy; BunnyCompany 2018</p>
+    </div>
     </footer>
-  </body>
-</html>"""
+    </body>
+    </html>"""
     return ret

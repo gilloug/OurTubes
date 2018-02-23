@@ -71,8 +71,10 @@ def main():
     ret += """<p class="center-align">Log out by clicking on the "<b>Account - Log Out</b>" tab.</p>"""
     ret += """<br/><p class="center-align">Have fun and do not hesitate to contact our team by email: <i>ourtubesteam@gmail.com</i></p>"""
     ret += """</div>
-    <footer class="footer">
-    <p>&copy; BunnyCompany 2018</p>
+    <footer class="page-footer red accent-5>
+    <div class="footer-copyright">
+    <p class="center">&copy; BunnyCompany 2018</p>
+    </div>
     </footer>
     </body>
     </html>"""
