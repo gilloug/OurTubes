@@ -209,22 +209,31 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         data = cursor.fetchall()
         i = 0
         data = tuple(sorted(data, reverse=True, key=lambda item: item[5]))
-        if len(data) > 0:
-            ret += """<li class="collection-item">
+        if len(data) <= 0:
+            ret += """<li class="collection-item avatar">
+            <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_rss-256.png" alt="" width="100" height="100" class="">
             <p>
-            Current channel: <a class="right">""" + connected_to + """</a>
+            Current Channel:
             <br/>
-            Current music: <a class="right">""" + data[0][4] + """</a>
-            </p>
-            </li>"""
-        else:
-            ret += """<li class="collection-item">
-            <p>
-            Current channel: <a class="right">""" + connected_to + """</a>
-            </p>
-            </li>"""
+            <a>""" + connected_to + """</a>
+            </p>"""
         if len(data) is not 0:
             for music in data:
+                if i == 0:
+                    ret += """<li class="collection-item avatar">
+                    <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_rss-256.png" alt="" width="100" height="100" class="">
+                    <p>
+                    Current Channel:
+                    <br/>
+                    <a>""" + connected_to + """</a>
+                    </p>"""
+                    ret += """<li class="collection-item avatar">
+                    <img src=\"""" + music[3] + """\" alt="" class="">
+                    <p>
+                    Current music:
+                    <br/>
+                    <a>""" + music[4] + """</a>
+                    </p>"""
                 if i != 0:
                     ret += """<li class="collection-item avatar">
                     <img src=\"""" + music[3] + """\" alt="" class="">
