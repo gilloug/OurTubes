@@ -201,7 +201,7 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
       </div>
     </nav>
     </div>
-    <div class="row collection">"""
+    <ul class="collection">"""
     if connected == "True":
         conn = mysql.connect()
         cursor = conn.cursor()
@@ -328,7 +328,7 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         conn.close()
     else:
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
-    ret += """</div>
+    ret += """</ul>
  </div>
     <div class="fixed-action-btn" style="bottom:15px; right:15px">
     <a class="btn-floating btn-large waves-effect waves-light green accent-4" id="refresh" name="refresh"><i class="material-icons">refresh</i></a>
