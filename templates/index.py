@@ -17,21 +17,44 @@ def connection():
     <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <div class="navbar-fixed">
-    <nav class="red accent-4">
-    <ul class="nav nav-pills pull-right">
-    <li role="presentation" class="active"><a href="#!">OurTubes</a>
-    </li>
-    <li class="right"><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown0">Account<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown0' class='dropdown-content'>
-    <li><a href="register">Sign in</a></li>
-    <li class="active"><a href="index">Log in</a></li>
-    </ul>
-    <li class="right"><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i></a></li>
-    </ul>
+    <script>
+      $( document ).ready(function() {
+      $(".button-collapse").sideNav();
+      });
+    </script>
+    <nav>
+      <div class="nav-wrapper red accent-4">
+        <a href="/" class="brand-logo">OurTubes</a>
+        <ul id="slide-out" class="side-nav">
+          <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header green accent-3">Account<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><a href="register">Sign in</a></li>
+                    <li class="green"><a href="index">Log in</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i>Help</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+            <li class="active"><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a>
+            <ul id='dropdown2' class='dropdown-content'>
+               <li><a href="register">Sign in</a></li>
+               <li class="active"><a href="index">Log in</a></li>
+            </ul>
+          <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text left">help_outline</i>Help</a></li>
+        </ul>
+</li>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
     </nav>
     </div>
-    <div class="col s6 pull-s6 container jumbotron">
+    <div class="container">
     <form class="form-signin">
     <label for="inputChanName" class="sr-only">email</label>
     <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="email" required autofocus>
@@ -58,11 +81,6 @@ def connection():
     </form>
     </div>
     </body>
-    <footer class="page-footer red accent-5>
-    <div class="footer-copyright">
-    <p class="center">&copy; BunnyCompany 2018</p>
-    </div>
-    </footer>
     </html>"""
     return ret
 
@@ -82,16 +100,25 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
     <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <div class="navbar-fixed">
-    <nav class="red accent-4">
-<ul class="nav nav-pills pull-right">
-    <li role="presentation" class="active"><a href="/">OurTubes</a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown1' class='dropdown-content'>
-    <li><a class="black-text center-align" href="createChan">Create</a></li>
-    <li><a class="black-text center-align" href="deleteChan">Delete</a></li>
-    <li><a class="black-text center-align" href="joinChan">Join</a></li>
-    <li><a class="black-text center-align" id="leave" name="leave" href="#!">Leave</a></li>
+    <script>
+      $( document ).ready(function() {
+      $(".button-collapse").sideNav();
+      });
+    </script>
+    <nav>
+      <div class="nav-wrapper red accent-4">
+	<a href="/" class="brand-logo">OurTubes</a>
+	<ul id="slide-out" class="side-nav">
+	  <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+	      <li>
+		<a class="collapsible-header">Channels<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>
+                    <li><a href="createChan">create</a></li>
+                    <li><a href="deleteChan">delete</a></li>
+                    <li><a href="joinChan">join</a></li>
+<li><a id="leave" name="leave" href="#!">leave</a></li>
     <script>
     $(function() {
     $('#leave').click(function(e) {
@@ -103,24 +130,75 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
     }); }); });</script>"""
     if connected_as == "Administrator":
         ret += """<li class="divider"></li>
-        <li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>"""
+	<li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>"""
     ret += """</ul>
-    <li class="right"><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i></a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown2' class='dropdown-content'>
-    <li><a id="logout" name="logout" class="black-text center-align" href="#!">Logout</a></li>
+    </div>
+	      </li>
+ 	      <li class="active">
+		<a class="collapsible-header">Account<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>
+                    <li><a id="logout" name="logout" href="#!">Log out</a></li>
+		    <script>
+		      $(function() {
+		      $('#logout').click(function(e) {
+		      $.ajax({
+		      url: '/logout',
+		      type: 'POST',
+		      success: function(response) {
+		      window.location.href = "index";},
+		      error: function(error) {}
+		      }); }); });
+		    </script>
+		  </ul>
+		</div>
+	      </li>
+	      <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i>Help</a></li>
+            </ul>
+	  </li>
+	</ul>
+	<ul class="right hide-on-med-and-down">
+	  <li>
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown1' class='dropdown-content'>
+              <li><a href="createChan" class="black-text">create</a></li>
+              <li><a href="deleteChan" class="black-text">delete</a></li>
+              <li><a href="joinChan" class="black-text">join</a></li>
+<li><a id="lve" name="lve" href="#!" class="black-text">leave</a></li>
     <script>
     $(function() {
-    $('#logout').click(function(e) {
+    $('#lve').click(function(e) {
     $.ajax({
-    url: '/logout',
+    url: '/leave',
     type: 'POST',
-    success: function(response) {
-    window.location.href = "index";},
+    success: function(response) {window.location.href = "index";},
     error: function(error) {}
-    }); }); }); </script>
-    </ul>
-    </ul>
+    }); }); });</script>"""
+    if connected_as == "Administrator":
+        ret += """<li class="divider"></li>
+	<li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>"""
+    ret += """</ul>
+    <li>
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown2' class='dropdown-content'>
+              <li><a id="lgt" name="lgt" href="#!" class="black-text">Log out</a></li>
+	      <script>
+	  	$(function() {
+	  	$('#lgt').click(function(e) {
+	  	$.ajax({
+	  	url: '/logout',
+	  	type: 'POST',
+	  	success: function(response) {
+	  	window.location.href = "index";},
+	  	error: function(error) {}
+	  	}); }); });
+	      </script>
+	    </ul>
+	  </li>
+	  <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text left">help_outline</i>Help</a></li>
+	</ul>
+	<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
     </nav>
     </div>
     <div class="row collection">"""
@@ -132,27 +210,27 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         i = 0
         data = tuple(sorted(data, reverse=True, key=lambda item: item[5]))
         if len(data) > 0:
-            ret += """<li class="collection-item avatar">
-            <div class="title">
-            Current channel: """ + connected_to + """
-            </div>
-            <div class="secondary-content">
-            Current music: """ + data[0][4] + """
-            </div>
+            ret += """<li class="collection-item">
+            <p>
+            Current channel: <a class="right">""" + connected_to + """</a>
+            <br/>
+            Current music: <a class="right">""" + data[0][4] + """</a>
+            </p>
             </li>"""
         else:
             ret += """<li class="collection-item">
-            <p class="title">
-            Current channel: """ + connected_to + """
+            <p>
+            Current channel: <a class="right">""" + connected_to + """</a>
             </p>
             </li>"""
         if len(data) is not 0:
             for music in data:
                 if i != 0:
                     ret += """<li class="collection-item avatar">
-                    <img src=\"""" + music[3] + """\" alt="" class="circle">
-                    <a class="title" href=\"""" + music[2] + """\">""" + music[4] + """</a>
+                    <img src=\"""" + music[3] + """\" alt="" class="">
                     <p>
+                    <a class="title" href=\"""" + music[2] + """\">""" + music[4] + """</a>
+                    <br/>
                     """ + str(music[5]) + """ Likes
                     </p>
                     <div class="secondary-content">
@@ -203,7 +281,7 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
                     });
                     </script>"""
                     if (connected_as == "Administrator"):
-                        ret += """<a id="deleteBtn""" + str(i) + """\" data-url=\"""" + music[2] + """\" class = "btn-floating waves-effect waves-light red accent-4">
+                        ret += """<br/><a id="deleteBtn""" + str(i) + """\" data-url=\"""" + music[2] + """\" class = "btn-floating waves-effect waves-light red accent-4 right">
                         <i id="deleteBtn""" + str(i) + """\" class = "material-icons">delete</i></a>
                         <script>
                         $(function() {
@@ -232,14 +310,18 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
         <div class="secondary-content">
         <a id="addBtn" href="searchMusic" class="btn-floating waves-effect waves-light green accent-4">
         <i id="addBtn" class="material-icons">add</i></a>
-        </div></li></ul>"""
+        </div></li>
+        <li class="collection-item avatar">
+        <p><br/></p>
+        </li>
+        </ul>"""
         conn.commit()
         conn.close()
     else:
         ret += """<p class="center-align"><b><i>Join a channel</i></b></p>"""
     ret += """</div>
  </div>
-    <div class="fixed-action-btn" style="bottom:74px; right:15px">
+    <div class="fixed-action-btn" style="bottom:15px; right:15px">
     <a class="btn-floating btn-large waves-effect waves-light green accent-4" id="refresh" name="refresh"><i class="material-icons">refresh</i></a>
     </div>
     <script>
@@ -247,11 +329,6 @@ def main(mysql = None, connected='False', connected_as="", connected_to="", logi
     $('#refresh').click(function(e) {
     location.reload();
     }); }); </script>
-    <footer class="page-footer red accent-5>
-    <div class="footer-copyright">
-    <p class="center">&copy; BunnyCompany 2018</p>
-    </div>
-    </footer>
     </body>
     </html>"""
     return ret

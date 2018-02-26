@@ -64,7 +64,16 @@ def rgstr():
 
 @app.route('/help')
 def help():
-    return Help.main()
+    login= ""
+    connected_to = ""
+    connected_as = ""
+    try:
+        login = request.cookies.get('Login')
+        connected_to = request.cookies.get('Connected-to')
+        connected_as = request.cookies.get('Connected-as')
+    except:
+        pass
+    return Help.main(login, connected_to, connected_as)
 
 @app.route('/player')
 def plyr():

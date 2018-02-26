@@ -17,15 +17,25 @@ def login(mysql = None):
     <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <nav class="red accent-4">
-<ul class="nav nav-pills pull-right">
-    <li role="presentation" class="active"><a href="/">OurTubes</a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown1' class='dropdown-content'>
-    <li><a class="black-text center-align" href="createChan">Create</a></li>
-    <li><a class="black-text center-align" href="deleteChan">Delete</a></li>
-    <li><a class="black-text center-align" href="joinChan">Join</a></li>
-    <li><a class="black-text center-align" id="leave" name="leave" href="#!">Leave</a></li>
+    <script>
+      $( document ).ready(function() {
+      $(".button-collapse").sideNav();
+      });
+    </script>
+    <nav>
+      <div class="nav-wrapper red accent-4">
+	<a href="/" class="brand-logo">OurTubes</a>
+	<ul id="slide-out" class="side-nav">
+	  <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+	      <li>
+		<a class="collapsible-header">Channels<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>
+                    <li><a href="createChan">create</a></li>
+                    <li><a href="deleteChan">delete</a></li>
+                    <li><a href="joinChan">join</a></li>
+<li><a id="leave" name="leave" href="#!">leave</a></li>
     <script>
     $(function() {
     $('#leave').click(function(e) {
@@ -35,32 +45,59 @@ def login(mysql = None):
     success: function(response) {window.location.href = "index";},
     error: function(error) {}
     }); }); });</script>
-    </ul>
-    <li class="right"><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i></a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown2' class='dropdown-content'>
-    <li><a id="logout" name="logout" class="black-text center-align" href="#!">Logout</a></li>
+		    <li class="divider"></li>
+		    <li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>
+		  </ul>
+		</div>
+	      </li>
+ 	      <li>
+		<a class="collapsible-header">Account<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>
+                    <li><a id="login" name="login" href="#!">Log in</a></li>
+		  </ul>
+		</div>
+	      </li>
+	      <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i>Help</a></li>
+            </ul>
+	  </li>
+	</ul>
+	<ul class="right hide-on-med-and-down">
+	  <li class="active">
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown1' class='dropdown-content'>
+              <li><a href="createChan" class="black-text">create</a></li>
+              <li><a href="deleteChan" class="black-text">delete</a></li>
+              <li><a href="joinChan" class="black-text">join</a></li>
+<li><a id="lve" name="lve" href="#!" class="black-text">leave</a></li>
     <script>
     $(function() {
-    $('#logout').click(function(e) {
+    $('#lve').click(function(e) {
     $.ajax({
-    url: '/logout',
+    url: '/leave',
     type: 'POST',
-    success: function(response) {
-    window.location.href = "index";},
+    success: function(response) {window.location.href = "index";},
     error: function(error) {}
-    }); }); }); </script>
-    </ul>
-    </ul>
+    }); }); });</script>
+	      <li class="divider"></li>
+	      <li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>
+	    </ul>
+	  <li>
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown2' class='dropdown-content'>
+              <li><a id="login" name="login" href="/" class="black-text">Log in</a></li>
+	    </ul>
+	  </li>
+	  <li><a class="blue-text accent-4" href="help"><i class="material-icons blue-text left">help_outline</i>Help</a></li>
+	</ul>
+	<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
     </nav>
+  </body>
+</html>
     <div class="row collection">
     <p class="center-align"><b><i>Log in</i></b></p>
     </div>
-    <footer class="page-footer red accent-5>
-    <div class="footer-copyright">
-    <p class="center">&copy; BunnyCompany 2018</p>
-    </div>
-    </footer>
     </body>
     </html>"""
     return ret

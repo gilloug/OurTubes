@@ -4,7 +4,7 @@ import sys
 from flask import Flask, render_template, request, json, jsonify
 
 
-def main():
+def main(login, connected_to, connected_as):
     ret = """<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -18,16 +18,25 @@ def main():
     <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <div class="navbar-fixed">
-    <nav class="red accent-4">
-    <ul class="nav nav-pills pull-right">
-    <li role="presentation" class="active"><a href="/">OurTubes</a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown1' class='dropdown-content'>
-    <li><a class="black-text center-align" href="createChan">Create</a></li>
-    <li><a class="black-text center-align" href="deleteChan">Delete</a></li>
-    <li><a class="black-text center-align" href="joinChan">Join</a></li>
-    <li><a class="black-text center-align" id="leave" name="leave" href="#!">Leave</a></li>
+    <script>
+      $( document ).ready(function() {
+      $(".button-collapse").sideNav();
+      });
+    </script>
+    <nav>
+      <div class="nav-wrapper red accent-4">
+	<a href="/" class="brand-logo">OurTubes</a>
+	<ul id="slide-out" class="side-nav">
+	  <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+	      <li>
+		<a class="collapsible-header">Channels<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>
+                    <li><a href="createChan">create</a></li>
+                    <li><a href="deleteChan">delete</a></li>
+                    <li><a href="joinChan">join</a></li>
+<li><a id="leave" name="leave" href="#!">leave</a></li>
     <script>
     $(function() {
     $('#leave').click(function(e) {
@@ -36,24 +45,84 @@ def main():
     type: 'POST',
     success: function(response) {window.location.href = "index";},
     error: function(error) {}
-    }); }); });</script>
+    }); }); });</script>"""
+    if connected_as and connected_as == "Administrator":
+        ret += """<li class="divider"></li>
+	<li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>"""
+    ret += """</ul>
+    </div>
+	      </li>
+ 	      <li>
+		<a class="collapsible-header">Account<i class="material-icons">arrow_drop_down</i></a>
+		<div class="collapsible-body">
+		  <ul>"""
+    if login != "" and login != None:
+        ret += """<li><a id="logout" name="logout" href="#!">Log out</a></li>
+		    <script>
+		      $(function() {
+		      $('#logout').click(function(e) {
+		      $.ajax({
+		      url: '/logout',
+		      type: 'POST',
+		      success: function(response) {
+		      window.location.href = "index";},
+		      error: function(error) {}
+		      }); }); });
+		    </script>"""
+    else:
+        ret +="""<li><a id="login" name="login" href="/">Log in</a></li>"""
+    ret += """</ul>
+    </div>
+    </li>
+    <li><a class="blue-text accent-4 green accent-3" href="help"><i class="material-icons blue-text">help_outline</i>Help</a></li>
     </ul>
-    <li class="right"><a class="blue-text accent-4" href="help"><i class="material-icons blue-text">help_outline</i></a></li>
-    <li><a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a></li>
-    <ul id='dropdown2' class='dropdown-content'>
-    <li><a id="logout" name="logout" class="black-text center-align" href="#!">Logout</a></li>
+    </li>
+    </ul>
+	<ul class="right hide-on-med-and-down">
+	  <li>
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown1">Channels<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown1' class='dropdown-content'>
+              <li><a href="createChan" class="black-text">create</a></li>
+              <li><a href="deleteChan" class="black-text">delete</a></li>
+              <li><a href="joinChan" class="black-text">join</a></li>
+<li><a id="lve" name="lve" href="#!" class="black-text">leave</a></li>
     <script>
     $(function() {
-    $('#logout').click(function(e) {
+    $('#lve').click(function(e) {
     $.ajax({
-    url: '/logout',
+    url: '/leave',
     type: 'POST',
-    success: function(response) {
-    window.location.href = "index";},
+    success: function(response) {window.location.href = "index";},
     error: function(error) {}
-    }); }); }); </script>
+    }); }); });</script>"""
+    if connected_as and connected_as == "Administrator":
+        ret += """<li class="divider"></li>
+        <li><a class="red-text accent-4" href="player"><i class="material-icons red-text">play_arrow</i>Player</a></li>"""
+    ret += """</ul>
+    <li>
+	    <a class="dropdown-button" href="#!" data-hover="true" data-belowOrigin="true" data-activates="dropdown2">Account<i class="material-icons right">arrow_drop_down</i></a>
+	    <ul  id='dropdown2' class='dropdown-content'>"""
+    if login != "" and login != None:
+        ret += """<li><a id="lgt" name="lgt" href="#!" class="black-text">Log out</a></li>
+	      <script>
+	  	$(function() {
+	  	$('#lgt').click(function(e) {
+	  	$.ajax({
+	  	url: '/logout',
+	  	type: 'POST',
+	  	success: function(response) {
+	  	window.location.href = "index";},
+	  	error: function(error) {}
+	  	}); }); });
+	      </script>"""
+    else:
+        ret += """<li><a id="login" name="login" href="/" class="black-text">Log in</a></li>"""
+    ret += """</ul>
+    </li>
+    <li class="active"><a class="blue-text accent-4" href="help"><i class="material-icons blue-text left">help_outline</i>Help</a></li>
     </ul>
-    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
     </nav>
     </div>
     <div class="row collection">"""
@@ -72,11 +141,6 @@ def main():
     ret += """<p class="center-align">Log out by clicking on the "<b>Account - Log Out</b>" tab.</p>"""
     ret += """<br/><p class="center-align">Have fun and do not hesitate to contact our team by email: <i>ourtubesteam@gmail.com</i></p>"""
     ret += """</div>
-    <footer class="page-footer red accent-5>
-    <div class="footer-copyright">
-    <p class="center">&copy; BunnyCompany 2018</p>
-    </div>
-    </footer>
     </body>
     </html>"""
     return ret
